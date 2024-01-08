@@ -20,6 +20,7 @@ test("search for 'tuyển sinh' and validate some results appear", async (t) => 
   
     await t.typeText(searchInputSelector, "tuyển sinh").pressKey("enter");
   
+    
     await t
       .expect(Selector(".main .thong-tin .blog-details .btn").exists)
       .ok("At least one search result should exist");
