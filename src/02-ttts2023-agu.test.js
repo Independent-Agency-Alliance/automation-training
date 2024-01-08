@@ -33,14 +33,13 @@ test("no result should return when searching for 'tuyen sinh'", async (t) => {
 });
 
 test("search for 'tuyển sinh' and validate some results appear", async (t) => {
-    const searchInputSelector = Selector(".search .input-group .search");
-  
-    await t.expect(searchInputSelector.exists).ok("Search box should exist");
-  
-    await t.typeText(searchInputSelector, "tuyển sinh").pressKey("enter");
-  
-    await t
-      .expect(Selector(".main .thong-tin .blog-details .btn").exists)
-      .ok("At least one search result should exist");
-  });
-  
+  const searchInputSelector = Selector(".search .input-group .search");
+
+  await t.expect(searchInputSelector.exists).ok("Search box should exist");
+
+  await t.typeText(searchInputSelector, "tuyển sinh").pressKey("enter");
+
+  await t
+    .expect(Selector(".main .thong-tin .blog-details .btn").exists)
+    .ok("At least one search result should exist");
+});
