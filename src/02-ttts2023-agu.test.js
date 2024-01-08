@@ -8,10 +8,10 @@
  *  3.2. search for "tuyển sinh" and validate some results appear,
  *      validate that the pagination works correctly (homework)
  *          3.2.1. create a new branch from "develop"
- *          3.2.2. create a new test file "02-ttts2023-agu-pagination.test.js"
+ *          3.2.2. create a new test file "02-ttts2023-agu-pagination-<nhi-nguyen>.test.js"
  *          3.2.3. implement the test case
  *          3.2.4. push the code to the new branch
- *          3.2.5. create a pull request to merge the new branch to "develop"
+ *          3.2.5. create a pull request in github to merge the new branch to "develop"
  */
 
 import { Selector } from "testcafe";
