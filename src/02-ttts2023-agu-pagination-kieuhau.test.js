@@ -6,38 +6,6 @@ test("validate that the pgination works correctly", async (t) => {
   const searchInputSelector = Selector(".search .input-group .search");
   const nextPageButton = Selector(".main .row .pagination .page-item:last-child .page-link");
   const previousPageButton = Selector(".main .row .pagination .page-item:first-child .page-link");
-  const currentPage = Selector('.main .row .pagination .active .page-link');
-
-  await t.expect(searchInputSelector.exists).ok("input exsits");
-  await t.typeText(searchInputSelector, "tuyển sinh").pressKey("enter");
-
-  await t.expect(nextPageButton.exists).ok("next exsits");
-  await t.expect(previousPageButton.exists).ok("previous exsits");
-  await t
-    .expect(currentPage.exists).ok("current exsits")
-    .expect(currentPage.innerText).eql("1");
-  
-
-  //click nextPageButton
-  await t
-    .click(nextPageButton)
-    .expect(currentPage.innerText).eql("2");
- 
-  //click previousPageButton
-  await t
-  .click(previousPageButton)
-  .expect(currentPage.innerText).eql("1");
-
-});
-
-
-
-//'.main .thong-tin .col-sm-4:first-child'
-
-test.only("validate that the pgination works correctly", async (t) => {
-  const searchInputSelector = Selector(".search .input-group .search");
-  const nextPageButton = Selector(".main .row .pagination .page-item:last-child .page-link");
-  const previousPageButton = Selector(".main .row .pagination .page-item:first-child .page-link");
   const currentPageButton = Selector('.main .row .pagination .active .page-link');
   const page2Button = Selector('.main .row .pagination .page-item:nth-child(3) .page-link');
   const firstPostTitle = Selector('.main .thong-tin .col-sm-4:first-child');
