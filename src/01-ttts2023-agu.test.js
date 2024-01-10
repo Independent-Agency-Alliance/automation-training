@@ -12,7 +12,7 @@ const getURL = ClientFunction(() => window.location.href);
 
 fixture("ttts2023-agu").page("https://www.agu.edu.vn/vi");
 
-test("should display TTTS2023", async (t) => {
+test("should display Thong Tin Tuyen Sinh 2023", async (t) => {
   await t
     .expect(Selector(".main .row:first-child .panel-title").innerText)
     .eql(" Thông tin Tuyển sinh 2023");
