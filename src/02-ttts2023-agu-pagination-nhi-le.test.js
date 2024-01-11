@@ -38,9 +38,7 @@ test("search for 'tuyển sinh' and validate some results appear", async (t) => 
     await t .click(previousPageButton);
     await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
   
-  
-    // //click nextPageButton
     await t
       .click(nextPageButton);
-      await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
+    await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
   });
