@@ -7,9 +7,10 @@ test("validate that the pgination works correctly", async (t) => {
   const nextPageButton = Selector(".main .row .pagination .page-item:last-child .page-link");
   const previousPageButton = Selector(".main .row .pagination .page-item:first-child .page-link");
   const currentPageButton = Selector('.main .row .pagination .active .page-link');
+
+  const page1Button = Selector('.main .row .pagination .page-item:nth-child(2) .page-link');
   const page2Button = Selector('.main .row .pagination .page-item:nth-child(3) .page-link');
-  const firstPostTitle = Selector('.main .thong-tin .col-sm-4:first-child');
-  const firstPostTitleContent1 = await firstPostTitle.textContent;
+
 
   await t.expect(searchInputSelector.exists).ok("input exsits");
   await t.typeText(searchInputSelector, "tuyển sinh").pressKey("enter");
@@ -21,28 +22,41 @@ test("validate that the pgination works correctly", async (t) => {
     .expect(currentPageButton.innerText).eql("1");
   
 
+  //get textContent first element of Page1 with search "tuyển sinh"
+  const firstPostTitle = Selector('.main .thong-tin .col-sm-4:first-child');
+  const firstPostTitleContentPage1Active = await firstPostTitle.textContent;
+
   //click page 2, expect content not the same
   await t 
     .click(page2Button)
     .expect(currentPageButton.innerText).eql("2");
 
-    const firstPostTitleContent2 = await firstPostTitle.textContent;
-
+  const firstPostTitleContentPage2 = await firstPostTitle.textContent;
   await t  
-    .expect(firstPostTitleContent1).notEql(firstPostTitleContent2);
+    .expect(firstPostTitleContentPage1Active).notEql(firstPostTitleContentPage2);
 
 
-   //click previousPageButton
+  //click page 1, expect content not the same
   await t
-  .click(previousPageButton)
-  .expect(currentPageButton.innerText).eql("1")
-  .expect(firstPostTitleContent2).notEql(firstPostTitleContent1);
+    .click(page1Button)
+    .expect(currentPageButton.innerText).eql("1")
+
+  const firstPostTitleContentPage1 = await firstPostTitle.textContent;
+  await t  
+    .expect(firstPostTitleContentPage1).eql(firstPostTitleContentPage1Active);
 
 
-  // //click nextPageButton
+  //click nextPageButton
   await t
     .click(nextPageButton)
     .expect(currentPageButton.innerText).eql("2")
-    .expect(firstPostTitleContent1).notEql(firstPostTitleContent2);
- 
+    .expect(firstPostTitleContentPage1).notEql(firstPostTitleContentPage2);
+
+  
+   //click previousPageButton
+  await t
+    .click(previousPageButton)
+    .expect(currentPageButton.innerText).eql("1") 
+    .expect(firstPostTitleContentPage1).eql(firstPostTitleContentPage1Active);
+
 });
