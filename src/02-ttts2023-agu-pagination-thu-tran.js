@@ -22,8 +22,9 @@ fixture("ttts2023-agu").page("https://www.agu.edu.vn/vi/tim-kiem");
 
 test("validate that the pagination works correctly", async (t) => {
   const searchInputSelector = Selector(".search .input-group .search");
-  const paginationActiveSelector = Selector(".main .page-item .page-link").nth(2);
-
+  const nextPageButton = Selector(".main .row .pagination .page-item:last-child .page-link");
+  const previousPageButton = Selector(".main .row .pagination .page-item:first-child .page-link");
+  const currentPageButton = Selector(".main .row .pagination .active .page-link");
   await t.expect(searchInputSelector.exists).ok("Search box should exist");
 
   await t.typeText(searchInputSelector, "tuyển sinh").pressKey("enter");
