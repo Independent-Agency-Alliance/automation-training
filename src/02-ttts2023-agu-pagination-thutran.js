@@ -26,7 +26,7 @@ test("validate that the pagination works correctly", async (t) => {
     const previousPageButton = Selector(".main .row .pagination .page-item:first-child .page-link");
     const currentPageButton = Selector(".main .row .pagination .active .page-link");
 
-    const page2Button = Selector(".main .row .pagination .page-item:nth-child(3) .page-link");
+    const page2Button = Selector(".main .row .pagination .page-item:nth-child(2) .page-link");
     const firstPostTitle = Selector(".main .thong-tin .col-sm-4:first-child");
     const firstPostTitleContent = await firstPostTitle.textContent;
     await t.expect(searchInputSelector.exists).ok("Search box should exist");
