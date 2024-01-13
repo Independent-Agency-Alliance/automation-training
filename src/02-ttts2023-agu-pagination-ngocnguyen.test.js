@@ -37,6 +37,10 @@ test("search for 'tuyển sinh' and validate some results appear", async (t) => 
     .expect(Selector(".main .thong-tin .blog-details .btn").exists)
     .ok("At more six search result should exist");
 
+  for (let i = 0; i < 5; i++) {
+      await t.click(ClickNextPage);
+    }
+    
   await t.expect(ClickNextPage.exists).ok("Next page search should exist");
 
   await t.expect(ClickPreviousPage.exists).ok("Previous page search should exist");
