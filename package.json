@@ -16,7 +16,7 @@
     "url": "https://github.com/Independent-Agency-Alliance/automation-training/issues"
   },
   "homepage": "https://github.com/Independent-Agency-Alliance/automation-training#readme",
-  "dependencies": {
-    "testcafe": "^3.4.0"
+  "devDependencies": {
+    "testcafe": "^3.5.0"
   }
 }
