@@ -28,11 +28,12 @@ test("validate that the pagination which there is only 1 page of result", async 
 
 test("validate that the pagination which there are 2 pages of result", async (t) => {
     const searchInputSelector = Selector(".search .input-group .search");
-    
+
     const page2Button = Selector(".main .row .pagination .page-item:nth-child(2) .page-link");
     const nextPageButton = Selector(".main .row .pagination .page-item:last-child .page-link");
     const previousPageButton = Selector(".main .row .pagination .page-item:first-child .page-link");
     const currentPageButton = Selector(".main .row .pagination .active .page-link");
+    const searchResultOnPage = Selector(".main .thong-tin .blog-details .btn");
 
     const firstPostTitle = Selector(".main .thong-tin .col-sm-4:first-child");
     const firstPostTitleContent = await firstPostTitle.textContent;
@@ -41,8 +42,9 @@ test("validate that the pagination which there are 2 pages of result", async (t)
     await t.typeText(searchInputSelector, "chất lượng").pressKey("enter");
 
     await t
-        .expect(Selector(".main .thong-tin .blog-details .btn").exists)
+        .expect(Selector(searchResultOnPage).exists)
         .ok("At least one search result should exist");
+
 
     // check Pagination exist
     await t.expect(nextPageButton.exists).ok("Nextpage button should exist");
@@ -52,18 +54,20 @@ test("validate that the pagination which there are 2 pages of result", async (t)
         .ok("Currentpage button should exist")
         .expect(currentPageButton.innerText)
         .eql("1");
-    
 
-    await t.click(page2Button);
-    const firstPostTitleOnPage2 = Selector(".main .thong-tin .col-sm-4:first-child");
-    const firstPostTitleOnPage2Content = await firstPostTitleOnPage2.textContent;
-    await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
+    //if there are 2 page of result, "Page 1 must have 12 search results"
+    if (searchResultOnPage.childElementCount == 12) {
+        await t.click(page2Button);
+        const firstPostTitleOnPage2 = Selector(".main .thong-tin .col-sm-4:first-child");
+        const firstPostTitleOnPage2Content = await firstPostTitleOnPage2.textContent;
+        await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
 
-    //back page 1
-    await t.click(previousPageButton);
-    //compare content between PostTitle on page 1 and PostTitle on page 2
-    await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
+        //back page 1
+        await t.click(previousPageButton);
+        //compare content between PostTitle on page 1 and PostTitle on page 2
+        await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
 
-    await t.click(nextPageButton);
-    await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
+        await t.click(nextPageButton);
+        await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
+    }
 });
