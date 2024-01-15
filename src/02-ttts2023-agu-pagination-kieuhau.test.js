@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("ttts2023-agu").page("https://www.agu.edu.vn/vi/tim-kiem");
 
-test("validate that the pgination works correctly", async (t) => {
+test("validate that the pagination works correctly", async (t) => {
   const searchInputSelector = Selector(".search .input-group .search");
   const nextPageButton = Selector(".main .row .pagination .page-item:last-child .page-link");
   const previousPageButton = Selector(".main .row .pagination .page-item:first-child .page-link");
@@ -12,13 +12,13 @@ test("validate that the pgination works correctly", async (t) => {
   const page2Button = Selector('.main .row .pagination .page-item:nth-child(3) .page-link');
 
 
-  await t.expect(searchInputSelector.exists).ok("input exsits");
+  await t.expect(searchInputSelector.exists).ok("input exists");
   await t.typeText(searchInputSelector, "tuyển sinh").pressKey("enter");
 
-  await t.expect(nextPageButton.exists).ok("next exsits");
-  await t.expect(previousPageButton.exists).ok("previous exsits");
+  await t.expect(nextPageButton.exists).ok("next exists");
+  await t.expect(previousPageButton.exists).ok("previous exists");
   await t
-    .expect(currentPageButton.exists).ok("current exsits")
+    .expect(currentPageButton.exists).ok("current exists")
     .expect(currentPageButton.innerText).eql("1");
   
 
