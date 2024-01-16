@@ -55,19 +55,19 @@ test("validate that the pagination which there are 2 pages of result", async (t)
         .expect(currentPageButton.innerText)
         .eql("1");
 
-    //if there are 2 page of result, "Page 1 must have 12 search results"
-    if (searchResultOnPage.childElementCount == 12) {
-        await t.click(page2Button);
-        const firstPostTitleOnPage2 = Selector(".main .thong-tin .col-sm-4:first-child");
-        const firstPostTitleOnPage2Content = await firstPostTitleOnPage2.textContent;
-        await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
 
-        //back page 1
-        await t.click(previousPageButton);
-        //compare content between PostTitle on page 1 and PostTitle on page 2
-        await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
 
-        await t.click(nextPageButton);
-        await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
-    }
+    await t.click(page2Button);
+    const firstPostTitleOnPage2 = Selector(".main .thong-tin .col-sm-4:first-child");
+    const firstPostTitleOnPage2Content = await firstPostTitleOnPage2.textContent;
+    await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
+
+    //back page 1
+    await t.click(previousPageButton);
+    //compare content between PostTitle on page 1 and PostTitle on page 2
+    await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
+
+    await t.click(nextPageButton);
+    await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
+
 });
