@@ -6,8 +6,8 @@ fixture("ttts2023-agu").page("https://www.agu.edu.vn/vi/tim-kiem");
 
 test("search for 'Công khai' and there are 2 pages of result, validate the result and pagination", async (t) => {
   const searchInputSelector = Selector(".search .input-group .search");
-  const ClickNextPage = Selector(".main .page-item:last-child .page-link");
-  const ClickPreviousPage = Selector(".main .page-item:first-child .page-link");
+  const nextPageButton = Selector(".main .page-item:last-child .page-link");
+  const previousPageButton = Selector(".main .page-item:first-child .page-link");
  
   await t.expect(searchInputSelector.exists).ok("Search box should exist");
 
@@ -18,14 +18,14 @@ test("search for 'Công khai' and there are 2 pages of result, validate the resu
     .ok("At more six search result should exist");
 
   for (let i = 0; i < 5; i++) {
-      await t.click(ClickNextPage);
+      await t.click(nextPageButton);
     }
     
-  await t.expect(ClickNextPage.exists).ok("Next page search should exist");
+  await t.expect(nextPageButton.exists).ok("Next page search should exist");
 
-  await t.expect(ClickPreviousPage.exists).ok("Previous page search should exist");
+  await t.expect(previousPageButton.exists).ok("Previous page search should exist");
 
-  await t.click(ClickNextPage);
+  await t.click(nextPageButton);
 
-  await t.click(ClickPreviousPage);
+  await t.click(previousPageButton);
 });
