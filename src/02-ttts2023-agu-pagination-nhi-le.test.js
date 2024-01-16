@@ -19,25 +19,29 @@ test("search for 'tuyển sinh' and validate some results appear", async (t) => 
     const firstPostTitle = Selector(".main .thong-tin .col-sm-4:first-child");
     const firstPostTitleContent = await firstPostTitle.textContent;
 
+    // validate that the search box is visible
     await t.expect(searchInputSelector.exists).ok("Search box should exist");
   
+    // search for "tuyen sinh" and validate some results appear
     await t.typeText(searchInputSelector, "tuyển sinh").pressKey("enter");
-  
-    
     await t
       .expect(Selector(".main .thong-tin .blog-details .btn").exists)
       .ok("At least one search result should exist");
     
+    // validate that the pagination is visible
     await t.expect(pagination.exists).ok("pagination should exist");
 
+    //click the button 2 to navigate the page 2 and compare the first title on page 1 and page 2
     await t.click(page2Button);
     const firstPostTitleOnPage2 = Selector(".main .thong-tin .col-sm-4:first-child");
     const firstPostTitleOnPage2Content = await firstPostTitleOnPage2.textContent;
     await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
 
+    //click the previous button to navigate the previous page and compare the first title on page 1 and page 2
     await t .click(previousPageButton);
     await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
   
+    //click the next button to navigate the next page and compare the first title on page 1 and page 2
     await t.click(nextPageButton);
     await t.expect(firstPostTitleContent).notEql(firstPostTitleOnPage2Content);
   });
